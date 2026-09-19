@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathe Lerncenter</title>
+
+<style>
+:root {
+    --bg: #0f1117;
+    --panel: #171a23;
+    --panel2: #1e222d;
+    --border: #2b3040;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --accent: #6c8cff;
+    --accent2: #8b5cf6;
+    --green: #39c98a;
+    --red: #ef6464;
+    --yellow: #e6b84d;
+    --shadow: 0 12px 35px rgba(0,0,0,.25);
+}
+
+.light {
+    --bg: #f4f6fa;
+    --panel: #ffffff;
+    --panel2: #f0f2f7;
+    --border: #dfe3eb;
+    --text: #171923;
+    --muted: #687080;
+    --shadow: 0 10px 30px rgba(30,40,70,.10);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: .2s;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app {
+    max-width: 1250px;
+    margin: auto;
+    padding: 25px;
+}
+
+/* HEADER */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 21px;
+}
+
+.logo p {
+    margin: 3px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.header-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.icon-btn {
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 12px;
+}
+
+/* NAV */
+
+nav {
+    display: flex;
+    gap: 7px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 6px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+
+nav button {
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    padding: 11px 16px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+nav button.active {
+    background: var(--panel2);
+    color: var(--text);
+}
+
+/* HERO */
+
+.hero {
+    padding: 27px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(108,140,255,.25), transparent 30%),
+        linear-gradient(135deg, var(--panel), var(--panel2));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    margin: 0 0 7px;
+    font-size: 28px;
+}
+
+.hero p {
+    margin: 0;
+    color: var(--muted);
+}
+
+/* DASHBOARD */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 17px;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat-value {
+    font-size: 25px;
+    font-weight: 800;
+    margin-top: 5px;
+}
+
+/* CARDS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.card h3 {
+    margin-top: 0;
+}
+
+.topic-card {
+    cursor: pointer;
+    transition: .18s;
+}
+
+.topic-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.topic-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topic-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    background: var(--panel2);
+    font-weight: bold;
+}
+
+.progress {
+    height: 7px;
+    background: var(--panel2);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 13px;
+}
+
+.progress div {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: inherit;
+}
+
+/* BUTTONS */
+
+.primary,
+.secondary,
+.danger {
+    border: none;
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.primary {
+    background: var(--accent);
+    color: white;
+}
+
+.secondary {
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.danger {
+    background: rgba(239,100,100,.12);
+    color: var(--red);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+/* LEARNING */
+
+.toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+select,
+input,
+textarea {
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 11px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 110px;
+    resize: vertical;
+}
+
+.task {
+    margin-bottom: 15px;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    background: var(--panel2);
+    color: var(--muted);
+}
+
+.badge.blue {
+    color: var(--accent);
+}
+
+.badge.green {
+    color: var(--green);
+}
+
+.badge.yellow {
+    color: var(--yellow);
+}
+
+.solution {
+    display: none;
+    margin-top: 15px;
+    padding: 17px;
+    border-radius: 12px;
+    background: var(--panel2);
+    border-left: 3px solid var(--accent);
+    line-height: 1.6;
+}
+
+.solution.show {
+    display: block;
+}
+
+.answer {
+    margin-top: 15px;
+}
+
+.hint {
+    display: none;
+    margin-top: 12px;
+    padding: 13px;
+    background: rgba(108,140,255,.08);
+    border: 1px solid rgba(108,140,255,.2);
+    border-radius: 10px;
+    color: var(--muted);
+}
+
+.hint.show {
+    display: block;
+}
+
+/* FORMULAS */
+
+.formula-search {
+    width: 100%;
+    margin-bottom: 17px;
+}
+
+.formula-category {
+    margin-bottom: 25px;
+}
+
+.formula-category h3 {
+    margin-bottom: 10px;
+}
+
+.formula {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 9px;
+    overflow: hidden;
+}
+
+.formula-head {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.formula-name {
+    font-weight: 700;
+}
+
+.formula-main {
+    font-size: 19px;
+    margin-top: 5px;
+    font-family: "Times New Roman", serif;
+}
+
+.formula-body {
+    display: none;
+    padding: 0 16px 16px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.formula.open .formula-body {
+    display: block;
+}
+
+.formula-body strong {
+    color: var(--text);
+}
+
+/* CHECKLIST */
+
+.check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+.check-item:last-child {
+    border-bottom: none;
+}
+
+.check-item input {
+    margin-top: 3px;
+}
+
+/* QUICK TEST */
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 13px;
+    margin: 7px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--panel2);
+    color: var(--text);
+}
+
+.quiz-option:hover {
+    border-color: var(--accent);
+}
+
+.quiz-option.correct {
+    border-color: var(--green);
+    background: rgba(57,201,138,.12);
+}
+
+.quiz-option.wrong {
+    border-color: var(--red);
+    background: rgba(239,100,100,.12);
+}
+
+/* EXAM */
+
+.timer {
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.exam-question {
+    margin-bottom: 20px;
+}
+
+.points {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* EMPTY */
+
+.empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+}
+
+/* MOBILE */
+
+@media(max-width: 800px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .app {
+        padding: 15px;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+    }
+}
+
+@media(max-width: 500px) {
+    header {
+        align-items: flex-start;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .stat-value {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+    <div class="logo">
+        <div class="logo-box">M</div>
+        <div>
+            <h1>Mathe Lerncenter</h1>
+            <p>Abitur · Statistik & Wahrscheinlichkeit</p>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <button class="icon-btn" id="themeBtn">☾</button>
+    </div>
+</header>
+
+<nav>
+    <button class="nav-btn active" data-page="home">Übersicht</button>
+    <button class="nav-btn" data-page="lernen">Lernen</button>
+    <button class="nav-btn" data-page="klausur">Klausur</button>
+    <button class="nav-btn" data-page="schnelltest">Schnelltest</button>
+    <button class="nav-btn" data-page="formeln">Formeln</button>
+    <button class="nav-btn" data-page="fortschritt">Fortschritt</button>
+</nav>
+
+<main id="content"></main>
+
+</div>
+
+<script>
+
+const topics = {
+    statistik: "Beschreibende Statistik",
+    mehrstufig: "Mehrstufige Zufallsversuche",
+    diskret: "Diskrete Wahrscheinlichkeitsverteilungen",
+    binomial: "Binomialverteilung"
+};
+
+let stats = JSON.parse(localStorage.getItem("mathStats")) || {
+    solved: 0,
+    correct: 0,
+    streak: 0,
+    mistakes: 0,
+    solvedTaskIds: [],
+    mistakeTaskIds: []
+};
+
+let checklist = JSON.parse(localStorage.getItem("mathChecklist")) || {};
+
+function save() {
+    localStorage.setItem("mathStats", JSON.stringify(stats));
+    localStorage.setItem("mathChecklist", JSON.stringify(checklist));
+}
+
+function shuffle(array) {
+    return [...array].sort(() => Math.random() - .5);
+}
+
+/* =========================
+   AUFGABEN
+========================= */
+
+const tasks = [
+
+/* STATISTIK */
+
+{
+id:1,
+topic:"statistik",
+difficulty:"leicht",
+noCalc:true,
+question:"Eine Klasse schreibt einen Test. Die Punktzahlen lauten: 7, 9, 10, 10, 11, 13, 15. Bestimme Mittelwert, Median und Modalwert.",
+hint:"Sortiert sind die Werte bereits. Der Median ist der mittlere Wert.",
+solution:`
+<strong>1. Mittelwert:</strong><br>
+x̄ = (7 + 9 + 10 + 10 + 11 + 13 + 15) / 7 = 75 / 7 ≈ 10,71<br><br>
+
+<strong>2. Median:</strong><br>
+Es gibt 7 Werte. Der 4. Wert ist der mittlere Wert.<br>
+Median = 10<br><br>
+
+<strong>3. Modalwert:</strong><br>
+10 kommt am häufigsten vor.<br>
+Modalwert = 10
+`
+},
+
+{
+id:2,
+topic:"statistik",
+difficulty:"leicht",
+noCalc:true,
+question:"In einer Umfrage fahren 12 von 30 Schülern mit dem Bus. Bestimme die relative Häufigkeit.",
+hint:"Relative Häufigkeit = absolute Häufigkeit / Gesamtzahl.",
+solution:`
+h = 12 / 30 = 0,4 = 40 %<br><br>
+Die relative Häufigkeit beträgt <strong>40 %</strong>.
+`
+},
+
+{
+id:3,
+topic:"statistik",
+difficulty:"mittel",
+noCalc:true,
+question:"Eine Datenreihe hat die Werte 3, 5, 7, 8, 10, 12, 15. Bestimme Spannweite und Median.",
+hint:"Spannweite = größter Wert − kleinster Wert.",
+solution:`
+Spannweite:<br>
+R = 15 − 3 = <strong>12</strong><br><br>
+
+Median:<br>
+Der mittlere, also 4. Wert ist <strong>8</strong>.
+`
+},
+
+{
+id:4,
+topic:"statistik",
+difficulty:"mittel",
+noCalc:true,
+question:"Erkläre, was die Standardabweichung über eine Datenreihe aussagt.",
+hint:"Überlege, wie weit die Werte typischerweise vom Mittelwert entfernt sind.",
+solution:`
+Die Standardabweichung beschreibt, wie stark die Werte um den Mittelwert streuen.<br><br>
+<strong>Kleine Standardabweichung:</strong> Die Werte liegen relativ nah am Mittelwert.<br>
+<strong>Große Standardabweichung:</strong> Die Werte sind stärker verteilt.
+`
+},
+
+/* MEHRSTUFIG */
+
+{
+id:5,
+topic:"mehrstufig",
+difficulty:"leicht",
+noCalc:true,
+question:"Ein fairer Würfel wird zweimal geworfen. Wie groß ist die Wahrscheinlichkeit, zweimal eine 6 zu würfeln?",
+hint:"Bei unabhängigen Würfen werden die Wahrscheinlichkeiten multipliziert.",
+solution:`
+P(6) = 1/6<br><br>
+P(6 und 6) = 1/6 · 1/6 = <strong>1/36</strong>
+`
+},
+
+{
+id:6,
+topic:"mehrstufig",
+difficulty:"leicht",
+noCalc:true,
+question:"Eine Münze wird zweimal geworfen. Wie groß ist die Wahrscheinlichkeit für genau einmal Kopf?",
+hint:"Es gibt zwei günstige Wege: Kopf-Zahl oder Zahl-Kopf.",
+solution:`
+P(KZ) = 1/2 · 1/2 = 1/4<br>
+P(ZK) = 1/2 · 1/2 = 1/4<br><br>
+
+P(genau einmal Kopf) = 1/4 + 1/4 = <strong>1/2</strong>
+`
+},
+
+{
+id:7,
+topic:"mehrstufig",
+difficulty:"mittel",
+noCalc:true,
+question:"In einer Urne liegen 3 rote und 2 blaue Kugeln. Es werden zwei Kugeln ohne Zurücklegen gezogen. Wie groß ist die Wahrscheinlichkeit, zweimal rot zu ziehen?",
+hint:"Beim zweiten Zug sind insgesamt nur noch 4 Kugeln vorhanden.",
+solution:`
+P(RR) = 3/5 · 2/4<br>
+= 6/20<br>
+= <strong>3/10</strong>
+`
+},
+
+{
+id:8,
+topic:"mehrstufig",
+difficulty:"mittel",
+noCalc:true,
+question:"Erkläre den Unterschied zwischen P(A ∩ B) und P(A | B).",
+hint:"Bei einer der beiden Schreibweisen wird vorausgesetzt, dass B bereits bekannt ist.",
+solution:`
+<strong>P(A ∩ B)</strong> bedeutet: A und B treten gemeinsam ein.<br><br>
+
+<strong>P(A | B)</strong> bedeutet: Wie wahrscheinlich ist A, wenn bekannt ist, dass B eingetreten ist?<br><br>
+
+Das Zeichen | bedeutet also sinngemäß <strong>„unter der Bedingung, dass“</strong>.
+`
+},
+
+{
+id:9,
+topic:"mehrstufig",
+difficulty:"mittel",
+noCalc:true,
+question:"Zwei Ereignisse A und B sind unabhängig. Es gilt P(A)=1/2 und P(B)=1/4. Bestimme P(A ∩ B).",
+hint:"Bei unabhängigen Ereignissen gilt P(A ∩ B) = P(A) · P(B).",
+solution:`
+P(A ∩ B) = P(A) · P(B)<br>
+= 1/2 · 1/4<br>
+= <strong>1/8</strong>
+`
+},
+
+/* DISKRET */
+
+{
+id:10,
+topic:"diskret",
+difficulty:"mittel",
+noCalc:true,
+question:"Eine Zufallsgröße X nimmt die Werte 0, 1 und 2 an. Die Wahrscheinlichkeiten sind 1/4, 1/2 und 1/4. Bestimme E(X).",
+hint:"Multipliziere jeden Wert mit seiner Wahrscheinlichkeit und addiere.",
+solution:`
+E(X) = 0 · 1/4 + 1 · 1/2 + 2 · 1/4<br><br>
+= 0 + 1/2 + 1/2<br>
+= <strong>1</strong>
+`
+},
+
+{
+id:11,
+topic:"diskret",
+difficulty:"mittel",
+noCalc:true,
+question:"Was bedeutet der Erwartungswert einer Zufallsgröße?",
+hint:"Er ist nicht unbedingt ein Wert, der tatsächlich bei einem einzelnen Versuch auftreten muss.",
+solution:`
+Der Erwartungswert beschreibt den <strong>durchschnittlich zu erwartenden Wert</strong> bei sehr vielen Wiederholungen eines Zufallsexperiments.
+`
+},
+
+{
+id:12,
+topic:"diskret",
+difficulty:"mittel",
+noCalc:true,
+question:"Ein Spiel kostet 2 €. Mit Wahrscheinlichkeit 1/2 gewinnt man 0 €, mit Wahrscheinlichkeit 1/4 gewinnt man 2 € und mit Wahrscheinlichkeit 1/4 gewinnt man 6 €. Ist das Spiel fair?",
+hint:"Berechne zuerst den erwarteten Gewinn und vergleiche ihn mit dem Einsatz.",
+solution:`
+Erwartete Auszahlung:<br>
+E(X) = 0 · 1/2 + 2 · 1/4 + 6 · 1/4<br>
+= 0 + 1/2 + 3/2<br>
+= <strong>2 €</strong><br><br>
+
+Der Einsatz beträgt 2 €.<br>
+Damit beträgt der erwartete Gewinn 0 €.<br><br>
+
+Das Spiel ist nach diesem Kriterium <strong>fair</strong>.
+`
+},
+
+/* BINOMIAL */
+
+{
+id:13,
+topic:"binomial",
+difficulty:"leicht",
+noCalc:true,
+question:"Ein fairer Münzwurf wird dreimal durchgeführt. X gibt die Anzahl der Köpfe an. Welche Verteilung besitzt X?",
+hint:"Es gibt eine feste Anzahl von Versuchen und pro Versuch zwei mögliche Ergebnisse.",
+solution:`
+X ist binomialverteilt:<br><br>
+<strong>X ~ B(3; 0,5)</strong><br><br>
+
+n = 3 Versuche<br>
+p = 0,5 Erfolgswahrscheinlichkeit
+`
+},
+
+{
+id:14,
+topic:"binomial",
+difficulty:"leicht",
+noCalc:true,
+question:"Bei einer Binomialverteilung mit n = 10 und p = 0,2: Bestimme den Erwartungswert.",
+hint:"E(X) = n · p.",
+solution:`
+E(X) = n · p<br>
+= 10 · 0,2<br>
+= <strong>2</strong>
+`
+},
+
+{
+id:15,
+topic:"binomial",
+difficulty:"leicht",
+noCalc:true,
+question:"Bei einer Binomialverteilung mit n = 9 und p = 1/3: Bestimme den Erwartungswert.",
+hint:"E(X)=n·p.",
+solution:`
+E(X) = 9 · 1/3<br>
+= <strong>3</strong>
+`
+},
+
+{
+id:16,
+topic:"binomial",
+difficulty:"mittel",
+noCalc:true,
+question:"Ein Basketballspieler trifft einen Freiwurf mit Wahrscheinlichkeit 0,5. Er wirft 4-mal. Wie groß ist die Wahrscheinlichkeit, genau 2 Treffer zu erzielen?",
+hint:"Verwende die Bernoulli-Formel.",
+solution:`
+P(X=2) = C(4,2) · 0,5² · 0,5²<br><br>
+
+C(4,2) = 6<br><br>
+
+P(X=2) = 6 · 0,25 · 0,25<br>
+= <strong>6/16 = 3/8</strong>
+`
+},
+
+{
+id:17,
+topic:"binomial",
+difficulty:"mittel",
+noCalc:true,
+question:"Bei einer Binomialverteilung gilt n = 8 und p = 0,5. Bestimme die Standardabweichung.",
+hint:"σ = √(n·p·(1−p)).",
+solution:`
+σ = √(8 · 0,5 · 0,5)<br>
+= √2<br><br>
+
+<strong>σ = √2 ≈ 1,41</strong>
+`
+},
+
+{
+id:18,
+topic:"binomial",
+difficulty:"mittel",
+noCalc:true,
+question:"Was bedeutet P(X ≤ 3) bei einer Binomialverteilung?",
+hint:"Das Zeichen ≤ bedeutet „kleiner oder gleich“.",
+solution:`
+P(X ≤ 3) bedeutet:<br><br>
+
+Die Wahrscheinlichkeit dafür, dass <strong>höchstens 3 Erfolge</strong> auftreten.<br><br>
+
+Also:<br>
+P(X≤3) = P(X=0)+P(X=1)+P(X=2)+P(X=3)
+`
+},
+
+{
+id:19,
+topic:"binomial",
+difficulty:"leicht",
+noCalc:true,
+question:"Was bedeutet P(X ≥ 1)?",
+hint:"„Mindestens“ ist hier wichtig.",
+solution:`
+P(X ≥ 1) bedeutet: <strong>mindestens ein Erfolg</strong>.<br><br>
+
+Oft ist das Gegenereignis einfacher:<br>
+P(X≥1) = 1 − P(X=0)
+`
+},
+
+/* REALISTISCHE AUFGABEN */
+
+{
+id:20,
+topic:"binomial",
+difficulty:"mittel",
+noCalc:false,
+realistic:true,
+question:"Eine Fabrik produziert Schrauben. Erfahrungsgemäß sind 4 % der Schrauben fehlerhaft. Es werden 50 Schrauben zufällig ausgewählt. X bezeichnet die Anzahl fehlerhafter Schrauben. Bestimme die Wahrscheinlichkeit, dass genau 2 Schrauben fehlerhaft sind.",
+hint:"Zuerst X definieren und die Binomialverteilung angeben. Danach die Bernoulli-Formel verwenden.",
+solution:`
+X = Anzahl der fehlerhaften Schrauben.<br><br>
+
+X ~ B(50; 0,04)<br><br>
+
+Gesucht ist P(X=2):<br><br>
+
+P(X=2) = C(50,2) · 0,04² · 0,96⁴⁸<br><br>
+
+Für die konkrete Dezimalzahl benötigt man einen Taschenrechner.
+`
+},
+
+{
+id:21,
+topic:"mehrstufig",
+difficulty:"mittel",
+noCalc:false,
+realistic:true,
+question:"Ein medizinischer Test erkennt eine Krankheit mit einer Wahrscheinlichkeit von 95 %, wenn die Person tatsächlich krank ist. Bei gesunden Personen zeigt der Test mit Wahrscheinlichkeit 4 % trotzdem ein positives Ergebnis. Die Krankheit tritt bei 2 % der Bevölkerung auf. Bestimme die Wahrscheinlichkeit, dass eine zufällig ausgewählte Person tatsächlich krank ist, wenn der Test positiv ausfällt.",
+hint:"Erstelle ein Baumdiagramm oder eine Vierfeldertafel. Gesucht ist eine bedingte Wahrscheinlichkeit.",
+solution:`
+Sei K = Person ist krank<br>
+T = Test ist positiv<br><br>
+
+Gegeben:<br>
+P(K)=0,02<br>
+P(T|K)=0,95<br>
+P(T|K̄)=0,04<br><br>
+
+Gesucht:<br>
+P(K|T)<br><br>
+
+Zuerst:<br>
+P(K∩T)=0,02·0,95=0,019<br><br>
+
+P(K̄∩T)=0,98·0,04=0,0392<br><br>
+
+P(T)=0,019+0,0392=0,0582<br><br>
+
+Damit:<br>
+P(K|T)=0,019/0,0582≈0,3265<br><br>
+
+Also ungefähr <strong>32,7 %</strong>.
+`
+},
+
+{
+id:22,
+topic:"statistik",
+difficulty:"mittel",
+noCalc:true,
+realistic:true,
+question:"Die Wartezeiten an einer Haltestelle wurden untersucht. Der Mittelwert beträgt 8 Minuten und die Standardabweichung 2 Minuten. Interpretiere diese beiden Werte im Zusammenhang mit der Situation.",
+hint:"Der Mittelwert beschreibt die Lage, die Standardabweichung die Streuung.",
+solution:`
+Der Mittelwert von 8 Minuten bedeutet, dass die Wartezeit durchschnittlich etwa <strong>8 Minuten</strong> beträgt.<br><br>
+
+Die Standardabweichung von 2 Minuten beschreibt die typische Streuung der Wartezeiten um diesen Mittelwert.<br><br>
+
+Eine kleinere Standardabweichung würde bedeuten, dass die Wartezeiten gleichmäßiger sind.
+`
+},
+
+{
+id:23,
+topic:"diskret",
+difficulty:"mittel",
+noCalc:true,
+realistic:true,
+question:"Bei einem Spiel kann man 0 €, 2 € oder 5 € gewinnen. Die Wahrscheinlichkeiten betragen 1/2, 1/4 und 1/4. Das Spiel kostet 2 €. Entscheide anhand des Erwartungswertes, ob der Einsatz langfristig fair ist.",
+hint:"Berechne die erwartete Auszahlung.",
+solution:`
+E(X)=0·1/2 + 2·1/4 + 5·1/4<br>
+= 0 + 1/2 + 5/4<br>
+= 7/4 = 1,75 €<br><br>
+
+Die erwartete Auszahlung beträgt 1,75 €.<br>
+Der Einsatz beträgt 2 €.<br><br>
+
+Erwarteter Gewinn:<br>
+1,75 € − 2 € = <strong>−0,25 €</strong><br><br>
+
+Der Spieler verliert langfristig durchschnittlich 0,25 € pro Spiel.
+`
+},
+
+{
+id:24,
+topic:"binomial",
+difficulty:"mittel",
+noCalc:true,
+realistic:true,
+question:"Ein Multiple-Choice-Test enthält 5 Fragen mit jeweils 4 Antwortmöglichkeiten. Es wird zufällig geraten. X gibt die Anzahl richtig beantworteter Fragen an. Definiere X und gib die passende Binomialverteilung an.",
+hint:"Bestimme n und p.",
+solution:`
+X = Anzahl der richtig beantworteten Fragen.<br><br>
+
+Es gibt 5 unabhängige Versuche.<br>
+Die Erfolgswahrscheinlichkeit pro Frage beträgt 1/4.<br><br>
+
+Daher:<br>
+<strong>X ~ B(5; 1/4)</strong>
+`
+}
+
+];
+
+/* =========================
+   FORMELSAMMLUNG
+========================= */
+
+const formulas = [
+
+{
+category:"Beschreibende Statistik",
+items:[
+
+{
+name:"Absolute Häufigkeit",
+formula:"nᵢ",
+body:"nᵢ gibt an, wie oft ein bestimmter Wert vorkommt."
+},
+
+{
+name:"Relative Häufigkeit",
+formula:"hᵢ = nᵢ / n",
+body:"hᵢ ist der Anteil eines Wertes an allen Beobachtungen.<br><br><strong>nᵢ</strong> = absolute Häufigkeit<br><strong>n</strong> = Gesamtzahl"
+},
+
+{
+name:"Arithmetisches Mittel",
+formula:"x̄ = (1/n) · Σxᵢ",
+body:"Der Mittelwert ist die Summe aller Werte geteilt durch die Anzahl der Werte.<br><br><strong>Typisch bei:</strong> „Berechne den Durchschnitt/Mittelwert.“"
+},
+
+{
+name:"Gewichteter Mittelwert",
+formula:"x̄ = Σ(xᵢ · hᵢ)",
+body:"Verwendest du, wenn Werte mit unterschiedlichen relativen Häufigkeiten gegeben sind."
+},
+
+{
+name:"Spannweite",
+formula:"R = xₘₐₓ − xₘᵢₙ",
+body:"Die Spannweite beschreibt den Abstand zwischen kleinstem und größtem Wert."
+},
+
+{
+name:"Quartilsabstand",
+formula:"IQR = Q₃ − Q₁",
+body:"Der Interquartilsabstand beschreibt die Streuung der mittleren 50 % der Daten."
+},
+
+{
+name:"Varianz",
+formula:"s² = (1/n) · Σ(xᵢ − x̄)²",
+body:"Die Varianz misst die Streuung der Werte um den Mittelwert."
+},
+
+{
+name:"Standardabweichung",
+formula:"s = √s²",
+body:"Die Standardabweichung ist die Wurzel aus der Varianz und hat dieselbe Einheit wie die ursprünglichen Daten."
+}
+
+]},
+
+{
+category:"Mehrstufige Zufallsversuche",
+items:[
+
+{
+name:"Laplace-Wahrscheinlichkeit",
+formula:"P(A) = |A| / |Ω|",
+body:"Gilt, wenn alle Ergebnisse gleich wahrscheinlich sind.<br><br><strong>|A|</strong> = Anzahl günstiger Ergebnisse<br><strong>|Ω|</strong> = Anzahl aller möglichen Ergebnisse"
+},
+
+{
+name:"Pfadregel 1 – Multiplizieren",
+formula:"P(A ∩ B) = P(A) · P(B|A)",
+body:"Entlang eines Pfades im Baumdiagramm werden die Wahrscheinlichkeiten multipliziert."
+},
+
+{
+name:"Pfadregel 2 – Addieren",
+formula:"P(E) = P(Pfad 1) + P(Pfad 2) + …",
+body:"Wenn mehrere Pfade zum gesuchten Ereignis führen, werden deren Wahrscheinlichkeiten addiert."
+},
+
+{
+name:"Gegenereignis",
+formula:"P(Ā) = 1 − P(A)",
+body:"Das Gegenereignis Ā bedeutet: A tritt nicht ein.<br><br><strong>Typischer Einsatz:</strong> „mindestens einmal“, „nicht“, „kein“."
+},
+
+{
+name:"Bedingte Wahrscheinlichkeit",
+formula:"P(A|B) = P(A ∩ B) / P(B)",
+body:"P(A|B) bedeutet: Wahrscheinlichkeit von A, wenn B bereits bekannt ist.<br><br><strong>|</strong> bedeutet „unter der Bedingung, dass“."
+},
+
+{
+name:"Produktregel",
+formula:"P(A ∩ B) = P(B) · P(A|B)",
+body:"Damit kannst du die Wahrscheinlichkeit für A und B berechnen, wenn eine bedingte Wahrscheinlichkeit gegeben ist."
+},
+
+{
+name:"Unabhängigkeit",
+formula:"P(A ∩ B) = P(A) · P(B)",
+body:"A und B sind unabhängig, wenn das Eintreten des einen Ereignisses die Wahrscheinlichkeit des anderen nicht verändert."
+},
+
+{
+name:"Bayes-Formel",
+formula:"P(A|B) = P(A ∩ B) / P(B)",
+body:"Damit kann eine bedingte Wahrscheinlichkeit aus gemeinsamen und gesamten Wahrscheinlichkeiten bestimmt werden. In Aufgaben mit Tests ist häufig ein Baumdiagramm oder eine Vierfeldertafel hilfreich."
+}
+
+]},
+
+{
+category:"Allgemeine diskrete Wahrscheinlichkeitsverteilungen",
+items:[
+
+{
+name:"Erwartungswert",
+formula:"E(X) = Σ xᵢ · pᵢ",
+body:"Multipliziere jeden möglichen Wert mit seiner Wahrscheinlichkeit und addiere alle Ergebnisse.<br><br><strong>xᵢ</strong> = möglicher Wert<br><strong>pᵢ</strong> = Wahrscheinlichkeit dieses Wertes"
+},
+
+{
+name:"Varianz",
+formula:"Var(X) = Σ(xᵢ − E(X))² · pᵢ",
+body:"Die Varianz beschreibt die durchschnittliche quadratische Abweichung vom Erwartungswert."
+},
+
+{
+name:"Standardabweichung",
+formula:"σ = √Var(X)",
+body:"Die Standardabweichung ist die Wurzel der Varianz."
+},
+
+{
+name:"Streuungsintervall",
+formula:"[E(X) − σ ; E(X) + σ]",
+body:"Das Streuungsintervall umfasst nach der hier verwendeten Schuldefinition den Bereich eine Standardabweichung um den Erwartungswert."
+},
+
+{
+name:"Fairness",
+formula:"E(Gewinn) = 0",
+body:"Ein Spiel ist im Sinne des Erwartungswertes fair, wenn der erwartete Gewinn des Spielers 0 € beträgt.<br><br>Alternativ kann man erwartete Auszahlung und Einsatz vergleichen."
+}
+
+]},
+
+{
+category:"Binomialverteilung",
+items:[
+
+{
+name:"Binomialverteilung",
+formula:"X ~ B(n; p)",
+body:"Eine Binomialverteilung liegt vor, wenn es eine feste Anzahl n gleichartiger, unabhängiger Versuche mit genau zwei möglichen Ergebnissen gibt.<br><br><strong>n</strong> = Anzahl der Versuche<br><strong>p</strong> = Erfolgswahrscheinlichkeit"
+},
+
+{
+name:"Bernoulli-Formel",
+formula:"P(X=k) = C(n,k) · pᵏ · (1−p)ⁿ⁻ᵏ",
+body:"Damit berechnest du die Wahrscheinlichkeit für <strong>genau k Erfolge</strong>.<br><br><strong>n</strong> = Versuchsanzahl<br><strong>k</strong> = Anzahl der Erfolge<br><strong>p</strong> = Erfolgswahrscheinlichkeit"
+},
+
+{
+name:"Kumulierte Wahrscheinlichkeit",
+formula:"P(X ≤ k) = Σᵢ₌₀ᵏ P(X=i)",
+body:"„Höchstens k“ bedeutet: 0, 1, 2, … bis k Erfolge."
+},
+
+{
+name:"Mindestens k",
+formula:"P(X ≥ k) = 1 − P(X ≤ k−1)",
+body:"Das Gegenereignis zu „mindestens k“ ist „höchstens k−1“."
+},
+
+{
+name:"Genau kein Erfolg",
+formula:"P(X=0) = (1−p)ⁿ",
+body:"Alle n Versuche müssen Misserfolge sein."
+},
+
+{
+name:"Mindestens ein Erfolg",
+formula:"P(X≥1) = 1 − (1−p)ⁿ",
+body:"Oft ist diese Gegenereignis-Methode deutlich einfacher als P(X=1)+P(X=2)+…"
+},
+
+{
+name:"Erwartungswert",
+formula:"E(X) = n · p",
+body:"Bei einer Binomialverteilung ergibt sich der Erwartungswert direkt aus Anzahl der Versuche mal Erfolgswahrscheinlichkeit."
+},
+
+{
+name:"Standardabweichung",
+formula:"σ = √(n · p · (1−p))",
+body:"Damit berechnest du die Standardabweichung einer Binomialverteilung."
+}
+
+]}
+
+];
+
+/* =========================
+   CHECKLISTE
+========================= */
+
+const checklistItems = [
+
+["stat1","Absolute und relative Häufigkeiten unterscheiden"],
+["stat2","Mittelwert berechnen und interpretieren"],
+["stat3","Median und Modalwert bestimmen"],
+["stat4","Spannweite und Quartilsabstand bestimmen"],
+["stat5","Varianz und Standardabweichung verstehen"],
+["stat6","Diagramme und Verteilungen interpretieren"],
+
+["mw1","Baumdiagramme lesen und erstellen"],
+["mw2","Pfadregel 1 anwenden"],
+["mw3","Pfadregel 2 anwenden"],
+["mw4","Gegenereignis verwenden"],
+["mw5","Bedingte Wahrscheinlichkeit berechnen"],
+["mw6","Unabhängigkeit prüfen"],
+
+["dv1","Zufallsgröße sinnvoll definieren"],
+["dv2","Wahrscheinlichkeitsverteilung aufstellen"],
+["dv3","Erwartungswert berechnen"],
+["dv4","Standardabweichung berechnen"],
+["dv5","Streuungsintervall interpretieren"],
+["dv6","Fairness anhand des Erwartungswertes beurteilen"],
+
+["bin1","Erkennen, wann Binomialverteilung vorliegt"],
+["bin2","X ~ B(n;p) aufstellen"],
+["bin3","Bernoulli-Formel anwenden"],
+["bin4","Einzelwahrscheinlichkeit bestimmen"],
+["bin5","Kumulierte Wahrscheinlichkeit verstehen"],
+["bin6","Gegenereignis bei mindestens/höchstens verwenden"],
+["bin7","Erwartungswert bestimmen"],
+["bin8","Standardabweichung bestimmen"],
+["bin9","Histogramme einer Binomialverteilung interpretieren"]
+
+];
+
+/* =========================
+   NAVIGATION
+========================= */
+
+document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderPage(btn.dataset.page);
+    });
+});
+
+document.getElementById("themeBtn").addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    localStorage.setItem(
+        "mathTheme",
+        document.body.classList.contains("light") ? "light" : "dark"
+    );
+});
+
+if(localStorage.getItem("mathTheme") === "light") {
+    document.body.classList.add("light");
+}
+
+/* =========================
+   HOME
+========================= */
+
+function renderHome() {
+
+    const percentage = stats.solved
+        ? Math.round(stats.correct / stats.solved * 100)
+        : 0;
+
+    document.getElementById("content").innerHTML = `
+
+    <section class="hero">
+        <h2>Bereit für die nächste Runde?</h2>
+        <p>Übe genau die Themen, die du für deine Klausur brauchst.</p>
+
+        <div class="actions">
+            <button class="primary" onclick="openPage('lernen')">
+                Aufgabe starten
+            </button>
+            <button class="secondary" onclick="openPage('schnelltest')">
+                Schnelltest
+            </button>
+        </div>
+    </section>
+
+    <section class="stats">
+
+        <div class="stat">
+            <div class="stat-label">Aufgaben bearbeitet</div>
+            <div class="stat-value">${stats.solved}</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Trefferquote</div>
+            <div class="stat-value">${percentage}%</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Aktuelle Serie</div>
+            <div class="stat-value">${stats.streak}</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Fehler offen</div>
+            <div class="stat-value">${stats.mistakeTaskIds.length}</div>
+        </div>
+
+    </section>
+
+    <div class="grid">
+
+        ${Object.entries(topics).map(([key,name]) => {
+
+            const topicTasks = tasks.filter(t => t.topic === key);
+            const solved = topicTasks.filter(t =>
+                stats.solvedTaskIds.includes(t.id)
+            ).length;
+
+            const percent = topicTasks.length
+                ? Math.round(solved / topicTasks.length * 100)
+                : 0;
+
+            return `
+            <div class="card topic-card" onclick="openLearningTopic('${key}')">
+
+                <div class="topic-top">
+                    <div>
+                        <h3>${name}</h3>
+                        <p style="color:var(--muted)">
+                            ${topicTasks.length} Aufgaben
+                        </p>
+                    </div>
+
+                    <div class="topic-icon">
+                        ${percent}%
+                    </div>
+                </div>
+
+                <div class="progress">
+                    <div style="width:${percent}%"></div>
+                </div>
+
+            </div>
+            `;
+
+        }).join("")}
+
+    </div>
+    `;
+}
+
+/* =========================
+   LERNEN
+========================= */
+
+function renderLernen(filterTopic = "alle") {
+
+    let filtered = [...tasks];
+
+    if(filterTopic !== "alle") {
+        filtered = filtered.filter(t => t.topic === filterTopic);
+    }
+
+    const html = filtered.map(task => `
+
+        <div class="card task">
+
+            <div class="task-header">
+
+                <div>
+                    <div class="badges">
+
+                        <span class="badge blue">
+                            ${topics[task.topic]}
+                        </span>
+
+                        <span class="badge">
+                            ${task.difficulty}
+                        </span>
+
+                        ${task.noCalc
+                            ? `<span class="badge green">Ohne Hilfsmittel</span>`
+                            : `<span class="badge yellow">Taschenrechner</span>`
+                        }
+
+                    </div>
+
+                    <h3>Aufgabe ${task.id}</h3>
+                </div>
+
+            </div>
+
+            <p>${task.question}</p>
+
+            <div class="answer">
+                <textarea
+                    placeholder="Deine Lösung hier eintragen..."
+                    id="answer-${task.id}">
+                </textarea>
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="secondary"
+                    onclick="toggleHint(${task.id})">
+                    Hinweis
+                </button>
+
+                <button
+                    class="primary"
+                    onclick="toggleSolution(${task.id})">
+                    Lösung anzeigen
+                </button>
+
+            </div>
+
+            <div class="hint" id="hint-${task.id}">
+                ${task.hint}
+            </div>
+
+            <div class="solution" id="solution-${task.id}">
+                ${task.solution}
+
+                <div class="actions">
+                    <button
+                        class="primary"
+                        onclick="rateTask(${task.id}, true)">
+                        Richtig
+                    </button>
+
+                    <button
+                        class="danger"
+                        onclick="rateTask(${task.id}, false)">
+                        Falsch
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    `).join("");
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+            <h2>Üben</h2>
+            <p>Erst selbst lösen. Dann Lösung aufdecken und vergleichen.</p>
+        </div>
+
+        <div class="toolbar">
+
+            <select id="topicFilter">
+                <option value="alle">Alle Themen</option>
+                ${Object.entries(topics).map(([key,name]) =>
+                    `<option value="${key}" ${filterTopic === key ? "selected" : ""}>
+                        ${name}
+                    </option>`
+                ).join("")}
+            </select>
+
+            <select id="difficultyFilter">
+                <option value="alle">Alle Schwierigkeiten</option>
+                <option value="leicht">Leicht</option>
+                <option value="mittel">Mittel</option>
+                <option value="schwer">Schwer</option>
+            </select>
+
+            <label class="secondary" style="display:flex;align-items:center;gap:8px">
+                <input type="checkbox" id="noCalcFilter">
+                Nur ohne Hilfsmittel
+            </label>
+
+            <button class="secondary" onclick="showMistakes()">
+                Meine Fehler
+            </button>
+
+        </div>
+
+        <div id="taskList">
+            ${html}
+        </div>
+    `;
+
+    document.getElementById("topicFilter").addEventListener("change", applyTaskFilters);
+    document.getElementById("difficultyFilter").addEventListener("change", applyTaskFilters);
+    document.getElementById("noCalcFilter").addEventListener("change", applyTaskFilters);
+}
+
+function applyTaskFilters() {
+
+    const topic = document.getElementById("topicFilter").value;
+    const difficulty = document.getElementById("difficultyFilter").value;
+    const noCalc = document.getElementById("noCalcFilter").checked;
+
+    let filtered = tasks.filter(task => {
+
+        if(topic !== "alle" && task.topic !== topic) return false;
+        if(difficulty !== "alle" && task.difficulty !== difficulty) return false;
+        if(noCalc && !task.noCalc) return false;
+
+        return true;
+    });
+
+    renderTaskList(filtered);
+}
+
+function renderTaskList(list) {
+
+    const container = document.getElementById("taskList");
+
+    if(!list.length) {
+        container.innerHTML = `
+            <div class="card empty">
+                Keine passenden Aufgaben gefunden.
+            </div>
+        `;
+        return;
+    }
+
+    container.innerHTML = list.map(task => `
+
+        <div class="card task">
+
+            <div class="badges">
+                <span class="badge blue">${topics[task.topic]}</span>
+                <span class="badge">${task.difficulty}</span>
+                ${task.noCalc
+                    ? `<span class="badge green">Ohne Hilfsmittel</span>`
+                    : `<span class="badge yellow">Taschenrechner</span>`
+                }
+            </div>
+
+            <h3>Aufgabe ${task.id}</h3>
+
+            <p>${task.question}</p>
+
+            <textarea placeholder="Deine Lösung..."></textarea>
+
+            <div class="actions">
+
+                <button class="secondary"
+                    onclick="toggleHint(${task.id})">
+                    Hinweis
+                </button>
+
+                <button class="primary"
+                    onclick="toggleSolution(${task.id})">
+                    Lösung anzeigen
+                </button>
+
+            </div>
+
+            <div class="hint" id="hint-${task.id}">
+                ${task.hint}
+            </div>
+
+            <div class="solution" id="solution-${task.id}">
+                ${task.solution}
+
+                <div class="actions">
+                    <button class="primary"
+                        onclick="rateTask(${task.id},true)">
+                        Richtig
+                    </button>
+
+                    <button class="danger"
+                        onclick="rateTask(${task.id},false)">
+                        Falsch
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+/* =========================
+   TASK ACTIONS
+========================= */
+
+function toggleSolution(id) {
+    document.getElementById(`solution-${id}`).classList.toggle("show");
+}
+
+function toggleHint(id) {
+    document.getElementById(`hint-${id}`).classList.toggle("show");
+}
+
+function rateTask(id, correct) {
+
+    stats.solved++;
+
+    if(correct) {
+
+        stats.correct++;
+        stats.streak++;
+
+        stats.solvedTaskIds = [
+            ...new Set([...stats.solvedTaskIds, id])
+        ];
+
+        stats.mistakeTaskIds =
+            stats.mistakeTaskIds.filter(x => x !== id);
+
+    } else {
+
+        stats.mistakes++;
+        stats.streak = 0;
+
+        if(!stats.mistakeTaskIds.includes(id)) {
+            stats.mistakeTaskIds.push(id);
+        }
+    }
+
+    save();
+    updateHomeIfVisible();
+}
+
+function showMistakes() {
+
+    const mistakeTasks = tasks.filter(t =>
+        stats.mistakeTaskIds.includes(t.id)
+    );
+
+    const container = document.getElementById("taskList");
+
+    if(!mistakeTasks.length) {
+        container.innerHTML = `
+            <div class="card empty">
+                Aktuell keine offenen Fehler.
+            </div>
+        `;
+        return;
+    }
+
+    renderTaskList(mistakeTasks);
+}
+
+/* =========================
+   FORMELN
+========================= */
+
+function renderFormulas() {
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+            <h2>Formelsammlung</h2>
+            <p>
+                Nicht nur die Formel lernen – auch wissen,
+                wann du sie brauchst.
+            </p>
+        </div>
+
+        <input
+            class="formula-search"
+            id="formulaSearch"
+            placeholder="Formel suchen, z. B. Erwartungswert, Binomial, Median...">
+
+        <div id="formulaList">
+
+            ${formulas.map(category => `
+
+                <div class="formula-category">
+
+                    <h3>${category.category}</h3>
+
+                    ${category.items.map((f,index) => `
+
+                        <div class="formula"
+                             data-search="${(
+                                f.name + " " +
+                                f.formula + " " +
+                                f.body
+                             ).toLowerCase()}">
+
+                            <div class="formula-head"
+                                 onclick="this.parentElement.classList.toggle('open')">
+
+                                <div>
+                                    <div class="formula-name">
+                                        ${f.name}
+                                    </div>
+
+                                    <div class="formula-main">
+                                        ${f.formula}
+                                    </div>
+                                </div>
+
+                                <span>+</span>
+
+                            </div>
+
+                            <div class="formula-body">
+                                ${f.body}
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+            `).join("")}
+
+        </div>
+    `;
+
+    document.getElementById("formulaSearch")
+        .addEventListener("input", e => {
+
+            const search = e.target.value.toLowerCase();
+
+            document.querySelectorAll(".formula").forEach(formula => {
+
+                formula.style.display =
+                    formula.dataset.search.includes(search)
+                    ? "block"
+                    : "none";
+
+            });
+        });
+}
+
+/* =========================
+   CHECKLISTE
+========================= */
+
+function renderFortschritt() {
+
+    const done = checklistItems.filter(x => checklist[x[0]]).length;
+    const percent = Math.round(done / checklistItems.length * 100);
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+            <h2>Dein Fortschritt</h2>
+            <p>Hake ab, was du wirklich sicher kannst.</p>
+
+            <div class="progress">
+                <div style="width:${percent}%"></div>
+            </div>
+
+            <p style="margin-top:10px">
+                ${done} von ${checklistItems.length} Fähigkeiten
+                (${percent}%)
+            </p>
+        </div>
+
+        <div class="card">
+
+            ${checklistItems.map(item => `
+
+                <label class="check-item">
+
+                    <input
+                        type="checkbox"
+                        ${checklist[item[0]] ? "checked" : ""}
+                        onchange="toggleChecklist('${item[0]}')">
+
+                    <span>${item[1]}</span>
+
+                </label>
+
+            `).join("")}
+
+        </div>
+    `;
+}
+
+function toggleChecklist(id) {
+    checklist[id] = !checklist[id];
+    save();
+    renderFortschritt();
+}
+
+/* =========================
+   SCHNELLTEST
+========================= */
+
+const quizQuestions = [
+
+{
+q:"Was bedeutet P(A ∩ B)?",
+options:[
+"A oder B",
+"A und B",
+"A unter der Bedingung B",
+"Nicht A"
+],
+correct:1,
+exp:"∩ bedeutet, dass beide Ereignisse gleichzeitig eintreten."
+},
+
+{
+q:"Was bedeutet P(A|B)?",
+options:[
+"A oder B",
+"A und B",
+"A unter der Bedingung, dass B eingetreten ist",
+"Das Gegenereignis von A"
+],
+correct:2,
+exp:"Das Zeichen | steht für eine Bedingung."
+},
+
+{
+q:"Welche Formel gehört zum Erwartungswert einer diskreten Zufallsgröße?",
+options:[
+"E(X)=n·p",
+"E(X)=Σxᵢ·pᵢ",
+"E(X)=√Var(X)",
+"E(X)=xₘₐₓ−xₘᵢₙ"
+],
+correct:1,
+exp:"Jeder mögliche Wert wird mit seiner Wahrscheinlichkeit multipliziert."
+},
+
+{
+q:"Was bedeutet P(X≤4)?",
+options:[
+"Genau 4",
+"Mindestens 4",
+"Höchstens 4",
+"Mehr als 4"
+],
+correct:2,
+exp:"≤ bedeutet kleiner oder gleich, also höchstens."
+},
+
+{
+q:"Wie lautet der Erwartungswert einer Binomialverteilung?",
+options:[
+"n+p",
+"n−p",
+"n·p",
+"√(np(1−p))"
+],
+correct:2,
+exp:"Bei X~B(n;p) gilt E(X)=n·p."
+},
+
+{
+q:"Wie lautet die Standardabweichung einer Binomialverteilung?",
+options:[
+"n·p",
+"√(n·p·(1−p))",
+"n·p²",
+"√(n+p)"
+],
+correct:1,
+exp:"σ=√(n·p·(1−p))."
+},
+
+{
+q:"Was ist die Spannweite?",
+options:[
+"Median − Mittelwert",
+"Maximum − Minimum",
+"Q3 − Q1",
+"Mittelwert / Anzahl"
+],
+correct:1,
+exp:"R = Maximum − Minimum."
+},
+
+{
+q:"Was beschreibt die Standardabweichung?",
+options:[
+"Die Anzahl der Werte",
+"Den häufigsten Wert",
+"Die Streuung um den Mittelwert",
+"Den Median"
+],
+correct:2,
+exp:"Sie beschreibt, wie stark Werte um den Mittelwert streuen."
+},
+
+{
+q:"Was gilt bei unabhängigen Ereignissen?",
+options:[
+"P(A∩B)=P(A)+P(B)",
+"P(A∩B)=P(A)·P(B)",
+"P(A|B)=0",
+"P(A)=P(B)"
+],
+correct:1,
+exp:"Unabhängigkeit bedeutet P(A∩B)=P(A)·P(B)."
+},
+
+{
+q:"Was ist das Gegenereignis von A?",
+options:[
+"A∩B",
+"A∪B",
+"Ā",
+"P(A|B)"
+],
+correct:2,
+exp:"Ā bedeutet, dass A nicht eintritt."
+},
+
+{
+q:"Wie berechnet man die Wahrscheinlichkeit eines Pfades im Baumdiagramm?",
+options:[
+"Addieren",
+"Multiplizieren",
+"Subtrahieren",
+"Dividieren"
+],
+correct:1,
+exp:"Entlang eines Pfades werden die Wahrscheinlichkeiten multipliziert."
+},
+
+{
+q:"Wie kombiniert man mehrere günstige Pfade?",
+options:[
+"Multiplizieren",
+"Addieren",
+"Quadrieren",
+"Null setzen"
+],
+correct:1,
+exp:"Mehrere passende Pfade werden addiert."
+},
+
+{
+q:"Wann kann man die Laplace-Formel verwenden?",
+options:[
+"Wenn alle Ergebnisse gleich wahrscheinlich sind",
+"Immer",
+"Nur bei Binomialverteilungen",
+"Nur bei Würfeln"
+],
+correct:0,
+exp:"P(A)=|A|/|Ω| gilt bei gleich wahrscheinlichen Ergebnissen."
+},
+
+{
+q:"Was bedeutet X~B(10;0,3)?",
+options:[
+"10 Erfolge mit Wahrscheinlichkeit 0,3",
+"10 Versuche mit Erfolgswahrscheinlichkeit 0,3",
+"0,3 Versuche",
+"30 Versuche"
+],
+correct:1,
+exp:"n=10 und p=0,3."
+},
+
+{
+q:"Was bedeutet P(X=3)?",
+options:[
+"Höchstens 3",
+"Mindestens 3",
+"Genau 3",
+"Nicht 3"
+],
+correct:2,
+exp:"Das Gleichheitszeichen bedeutet genau."
+},
+
+{
+q:"Wie berechnet man P(X≥1) bei einer Binomialverteilung besonders einfach?",
+options:[
+"P(X=1)",
+"1−P(X=0)",
+"P(X≤1)",
+"P(X=0)"
+],
+correct:1,
+exp:"Das Gegenereignis zu mindestens einem Erfolg ist kein Erfolg."
+},
+
+{
+q:"Was ist der Median?",
+options:[
+"Der größte Wert",
+"Der kleinste Wert",
+"Der mittlere Wert einer sortierten Datenreihe",
+"Der häufigste Wert"
+],
+correct:2,
+exp:"Der Median teilt die sortierten Daten in zwei Hälften."
+},
+
+{
+q:"Was ist der Modalwert?",
+options:[
+"Der häufigste Wert",
+"Der mittlere Wert",
+"Der Durchschnitt",
+"Die Spannweite"
+],
+correct:0,
+exp:"Der Modalwert ist der am häufigsten vorkommende Wert."
+},
+
+{
+q:"Was bedeutet eine kleine Standardabweichung?",
+options:[
+"Starke Streuung",
+"Werte liegen relativ nah beieinander",
+"Sehr großer Mittelwert",
+"Keine Daten"
+],
+correct:1,
+exp:"Eine kleine Standardabweichung bedeutet geringe Streuung."
+},
+
+{
+q:"Was bedeutet ein erwarteter Gewinn von −0,50 €?",
+options:[
+"Langfristig 0,50 € Verlust pro Spiel im Durchschnitt",
+"Jeder verliert 0,50 €",
+"Jeder gewinnt 0,50 €",
+"Das Spiel ist fair"
+],
+correct:0,
+exp:"Der Erwartungswert beschreibt den langfristigen Durchschnitt."
+}
+
+];
+
+let currentQuiz = [];
+
+function renderSchnelltest() {
+
+    currentQuiz = shuffle(quizQuestions).slice(0,10);
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+            <h2>Schnelltest</h2>
+            <p>10 kurze Fragen. Keine Hilfsmittel.</p>
+        </div>
+
+        <div id="quizContainer"></div>
+
+        <button class="primary" onclick="renderSchnelltest()">
+            Neuer Test
+        </button>
+    `;
+
+    renderQuiz();
+}
+
+function renderQuiz() {
+
+    document.getElementById("quizContainer").innerHTML =
+        currentQuiz.map((q,index) => `
+
+        <div class="card" style="margin-bottom:15px">
+
+            <div class="points">
+                Frage ${index+1} von ${currentQuiz.length}
+            </div>
+
+            <h3>${q.q}</h3>
+
+            ${q.options.map((option,i) => `
+                <button
+                    class="quiz-option"
+                    onclick="answerQuiz(this,${index},${i})">
+                    ${option}
+                </button>
+            `).join("")}
+
+            <div
+                id="quiz-exp-${index}"
+                style="display:none;margin-top:10px;color:var(--muted)">
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function answerQuiz(button,index,choice) {
+
+    const question = currentQuiz[index];
+
+    const buttons =
+        button.parentElement.querySelectorAll(".quiz-option");
+
+    buttons.forEach(b => b.disabled = true);
+
+    if(choice === question.correct) {
+        button.classList.add("correct");
+        stats.correct++;
+        stats.streak++;
+    } else {
+        button.classList.add("wrong");
+        buttons[question.correct].classList.add("correct");
+        stats.streak = 0;
+        stats.mistakes++;
+    }
+
+    stats.solved++;
+    save();
+
+    const explanation =
+        document.getElementById(`quiz-exp-${index}`);
+
+    explanation.style.display = "block";
+    explanation.innerHTML = question.exp;
+}
+
+/* =========================
+   KLAUSUR
+========================= */
+
+let examTimer = null;
+let examSeconds = 45 * 60;
+
+function renderKlausur() {
+
+    clearInterval(examTimer);
+
+    examSeconds = 45 * 60;
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+
+            <div style="display:flex;justify-content:space-between;gap:15px;align-items:center">
+
+                <div>
+                    <h2>Klausurmodus</h2>
+                    <p>
+                        Keine Lösungen während der Bearbeitung.
+                    </p>
+                </div>
+
+                <div class="timer" id="timer">
+                    45:00
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="examTasks"></div>
+
+        <button class="primary" onclick="finishExam()">
+            Klausur abgeben
+        </button>
+    `;
+
+    const examTasks = shuffle(tasks).slice(0,8);
+
+    document.getElementById("examTasks").innerHTML =
+        examTasks.map((task,index) => `
+
+        <div class="card exam-question">
+
+            <div class="points">
+                Aufgabe ${index+1} · ${task.difficulty}
+            </div>
+
+            <h3>${task.question}</h3>
+
+            <textarea
+                id="exam-answer-${task.id}"
+                placeholder="Deine vollständige Lösung...">
+            </textarea>
+
+        </div>
+
+    `).join("");
+
+    examTimer = setInterval(() => {
+
+        examSeconds--;
+
+        if(examSeconds <= 0) {
+            clearInterval(examTimer);
+            finishExam();
+        }
+
+        const min = Math.floor(examSeconds / 60);
+        const sec = examSeconds % 60;
+
+        document.getElementById("timer").textContent =
+            `${String(min).padStart(2,"0")}:${String(sec).padStart(2,"0")}`;
+
+    },1000);
+}
+
+function finishExam() {
+
+    clearInterval(examTimer);
+
+    document.getElementById("content").innerHTML = `
+
+        <div class="hero">
+            <h2>Klausur abgegeben</h2>
+            <p>
+                Vergleiche deine Lösungen jetzt selbst mit den Musterlösungen.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Wie lief es?</h3>
+
+            <p>
+                Bewerte dich ehrlich. Die Seite versucht nicht,
+                deine freien Antworten mit einer KI zu bewerten.
+                Du bekommst stattdessen die vollständige Lösung
+                und kannst deine Punkte selbst einschätzen.
+            </p>
+
+            <div class="actions">
+
+                <button class="primary"
+                    onclick="openPage('lernen')">
+                    Lösungen üben
+                </button>
+
+                <button class="secondary"
+                    onclick="openPage('fortschritt')">
+                    Fortschritt ansehen
+                </button>
+
+            </div>
+        </div>
+    `;
+}
+
+/* =========================
+   PAGE HELPERS
+========================= */
+
+function openPage(page) {
+
+    document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.page === page);
+    });
+
+    renderPage(page);
+}
+
+function openLearningTopic(topic) {
+
+    document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.page === "lernen");
+    });
+
+    renderLernen(topic);
+}
+
+function updateHomeIfVisible() {
+
+    const active =
+        document.querySelector(".nav-btn.active");
+
+    if(active && active.dataset.page === "home") {
+        renderHome();
+    }
+}
+
+function renderPage(page) {
+
+    if(page === "home") renderHome();
+    if(page === "lernen") renderLernen();
+    if(page === "formeln") renderFormulas();
+    if(page === "fortschritt") renderFortschritt();
+    if(page === "schnelltest") renderSchnelltest();
+    if(page === "klausur") renderKlausur();
+}
+
+/* START */
+
+renderHome();
+
+</script>
+
+</body>
+</html>
